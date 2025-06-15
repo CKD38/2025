@@ -203,66 +203,101 @@
         /* 響應式設計：小螢幕調整 */
         @media (max-width: 768px) {
             .header-section {
-                padding: 1.5rem 1rem; /* 手機上也使用較小的內邊距 */
+                padding: 1rem 0.5rem; /* 更小的內邊距 */
                 margin-bottom: 1rem; /* 手機上更小的底部間距 */
             }
             .history-title {
-                font-size: 2rem; /* 手機上字體縮小 */
-                margin-bottom: 0.25rem; /* 手機上更小的間距 */
+                font-size: 1.8rem; /* 手機上字體縮小 */
+                margin-bottom: 0.15rem; /* 手機上更小的間距 */
             }
             .subtitle {
-                font-size: 1rem; /* 手機上字體縮小 */
-                display: block; /* Ensure subtitle is visible on mobile if needed */
+                font-size: 0.9rem; /* 手機上字體縮小 */
+                display: block;
             }
             .company-name {
-                 font-size: 1rem; /* 手機上字體縮小 */
-                 margin-bottom: 0.1rem;
+                 font-size: 0.9rem; /* 手機上字體縮小 */
+                 margin-bottom: 0.05rem;
+            }
+
+            .timeline {
+                padding: 0 0.5rem; /* 左右內邊距也縮小 */
             }
 
             .timeline::before {
-                left: 15px; /* 線條向左移動 */
-                transform: translateX(0);
+                left: 50%; /* 維持時間軸在中間 */
+                transform: translateX(-50%);
             }
             .timeline-item {
-                flex-direction: column; /* 堆疊排列 */
-                align-items: flex-start; /* 左對齊 */
-                margin-bottom: 2rem; /* 手機上減少項目間距 */
-                padding-left: 30px; /* 為線和圓點留空間 */
+                flex-direction: row; /* 維持橫向排列，讓時間軸居中 */
+                justify-content: space-between; /* 內容與點之間分開 */
+                align-items: flex-start; /* 頂部對齊 */
+                margin-bottom: 2rem; /* 減少項目間距 */
+                padding: 0; /* 移除額外填充 */
                 min-height: unset; /* 移除最小高度，讓內容更緊湊 */
             }
-            /* 調整左右內容側的寬度為100% */
+
             .timeline-content-side {
-                width: 100%;
-                margin: 0 !important; /* 覆蓋自動邊距 */
+                width: calc(50% - 25px); /* 調整寬度，為中心留出更多空間 */
             }
 
             .timeline-card {
-                padding: 1rem; /* 手機上卡片內邊距縮小 */
-                text-align: left; /* 統一左對齊 */
-                align-items: flex-start; /* 按鈕左對齊 */
+                padding: 0.8rem; /* 手機上卡片內邊距縮小 */
+                height: auto; /* 高度自適應 */
             }
+            .timeline-card p {
+                font-size: 0.9rem; /* 手機上文字字體縮小 */
+                margin-bottom: 0.6rem;
+            }
+            .timeline-card a {
+                padding: 0.4rem 0.8rem; /* 手機上按鈕內邊距縮小 */
+                font-size: 0.8rem;
+            }
+
             .timeline-date-text {
-                padding: 0; /* 移除小螢幕上的日期內邊距 */
-                margin-bottom: 0.5rem; /* 日期和卡片間距 */
-                font-size: 1rem; /* 手機上日期字體縮小 */
+                padding: 0.8rem; /* 與卡片內邊距匹配 */
+                font-size: 0.9rem; /* 手機上日期字體縮小 */
+                text-align: right; /* 確保日期在另一側 */
+                width: 100%; /* 佔滿空間 */
             }
 
             .timeline-center {
-                position: absolute;
-                left: 0; /* 圓點容器向左移動 */
-                top: 0; /* 圓點在頂部 */
-                width: 30px; /* 調整寬度 */
-                justify-content: flex-start; /* 圓點靠左 */
+                width: 50px; /* 調整中心區域寬度 */
+                flex-shrink: 0;
             }
             .timeline-dot {
-                margin-left: 3px; /* 圓點位置調整 */
-                width: 20px; /* 手機上圓點稍微縮小 */
-                height: 20px;
-                border-width: 3px; /* 邊框也縮小 */
+                width: 18px; /* 手機上圓點進一步縮小 */
+                height: 18px;
+                border-width: 2px; /* 邊框進一步縮小 */
             }
+            /* 手機上連接線重新啟用並調整長度 */
             .timeline-center::before,
             .timeline-center::after {
-                display: none; /* 隱藏連接線 */
+                display: block; /* 重新顯示連接線 */
+                width: calc(50% - 9px); /* 從圓點到邊緣的距離 */
+            }
+            /* 調整手機上奇偶項目的對齊方式 */
+            .timeline-item:nth-child(odd) .timeline-content-side:first-child { /* 卡片在左 */
+                margin-right: auto;
+                text-align: right; /* 卡片內容右對齊 */
+            }
+            .timeline-item:nth-child(odd) .timeline-content-side:last-child { /* 日期在右 */
+                margin-left: auto;
+                text-align: left; /* 日期內容左對齊 */
+            }
+            .timeline-item:nth-child(odd) .timeline-card {
+                align-items: flex-end; /* 按鈕右對齊 */
+            }
+
+            .timeline-item:nth-child(even) .timeline-content-side:first-child { /* 日期在左 */
+                margin-right: auto;
+                text-align: right; /* 日期內容右對齊 */
+            }
+            .timeline-item:nth-child(even) .timeline-content-side:last-child { /* 卡片在右 */
+                margin-left: auto;
+                text-align: left; /* 卡片內容左對齊 */
+            }
+            .timeline-item:nth-child(even) .timeline-card {
+                align-items: flex-start; /* 按鈕左對齊 */
             }
         }
     </style>
