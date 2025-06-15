@@ -226,8 +226,9 @@
             .timeline-item {
                 flex-direction: column; /* 堆疊排列 */
                 align-items: flex-start; /* 左對齊 */
-                margin-bottom: 3rem; /* 間距縮小 */
+                margin-bottom: 2rem; /* 手機上減少項目間距 */
                 padding-left: 30px; /* 為線和圓點留空間 */
+                min-height: unset; /* 移除最小高度，讓內容更緊湊 */
             }
             /* 調整左右內容側的寬度為100% */
             .timeline-content-side {
@@ -236,12 +237,14 @@
             }
 
             .timeline-card {
+                padding: 1rem; /* 手機上卡片內邊距縮小 */
                 text-align: left; /* 統一左對齊 */
                 align-items: flex-start; /* 按鈕左對齊 */
             }
             .timeline-date-text {
                 padding: 0; /* 移除小螢幕上的日期內邊距 */
                 margin-bottom: 0.5rem; /* 日期和卡片間距 */
+                font-size: 1rem; /* 手機上日期字體縮小 */
             }
 
             .timeline-center {
@@ -253,6 +256,9 @@
             }
             .timeline-dot {
                 margin-left: 3px; /* 圓點位置調整 */
+                width: 20px; /* 手機上圓點稍微縮小 */
+                height: 20px;
+                border-width: 3px; /* 邊框也縮小 */
             }
             .timeline-center::before,
             .timeline-center::after {
